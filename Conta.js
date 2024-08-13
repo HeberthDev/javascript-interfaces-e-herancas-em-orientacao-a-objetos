@@ -25,9 +25,9 @@ export class Conta {
         return this._saldo;
     }
 
+    // Método abstrato ao qual as classes filhas são obrigados a chamá-lo, mas a implementação está a cargo da classe filha. Sendo sempre sobrescrito, criando um próprio método na classe filha.
     sacar( valor ){
-        let taxa = 1;
-        return this._sacar(valor, taxa);
+       throw new Error( "O método Sacar da conta é abstrato." ); 
     }
     
     _sacar( valor, taxa ) {
