@@ -1,8 +1,14 @@
+// Classe abstrata
 export class Conta {
     constructor( saldoInicial, cliente, agencia ) {
+        if( this.constructor == Conta ) { // Quando o desenvolvedor der "new Conta" ele vai reconhecer que está se referenciando ao construtor Conta e vai lançar esse erro.
+            throw new Error( "Você não deveria instanciar um objeto do tipo Conta diretamente." );
+        }
+
         this._saldo = saldoInicial;
         this._cliente = cliente;
         this._agencia = agencia;
+
     }
 
     set cliente( novoValor ) {
@@ -19,9 +25,9 @@ export class Conta {
         return this._saldo;
     }
 
+    // Método abstrato ao qual as classes filhas são obrigados a chamá-lo, mas a implementação está a cargo da classe filha. Sendo sempre sobrescrito, criando um próprio método na classe filha.
     sacar( valor ){
-        let taxa = 1;
-        return this._sacar(valor, taxa);
+       throw new Error( "O método Sacar da conta é abstrato." ); 
     }
     
     _sacar( valor, taxa ) {
@@ -43,7 +49,7 @@ export class Conta {
     }
 
     tranferir( valor, conta ) {
-        const valorSacado = this.sacar(valor);
-        conta.depositar(valorSacado);
+        const valorSacado = this.sacar( valor );
+        conta.depositar( valorSacado );
     }
 }
